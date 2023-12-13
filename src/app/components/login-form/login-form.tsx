@@ -25,7 +25,7 @@ const LoginForm = () => {
       <div style={{ paddingBottom: 40 }}>
         <h2>Login State</h2>
         {session ? (
-          <div data-testId="loggedInUser">
+          <div data-testid="loggedInUser">
             <p>User is logged in.</p>
             <button onClick={() => signOut()}>Logout</button>
           </div>
@@ -40,6 +40,7 @@ const LoginForm = () => {
           <div style={{ paddingBottom: 10 }}>
             <label>Email</label>
             <input
+              data-testid="emailTestId"
               type="text"
               name="Email"
               value={email}
@@ -53,6 +54,7 @@ const LoginForm = () => {
           <div style={{ paddingBottom: 10 }}>
             <label>Password</label>
             <input
+              data-testid="passwordTestId"
               name="Password"
               type="Password"
               value={password}
@@ -63,7 +65,9 @@ const LoginForm = () => {
               placeholder="email@domain.com"
             />
           </div>
-          <button type="submit">Submit Form</button>
+          <button type="submit" data-testid="submitFormTestId">
+            Submit Form
+          </button>
         </form>
       )}
     </div>
