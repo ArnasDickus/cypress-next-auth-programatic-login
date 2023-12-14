@@ -1,10 +1,13 @@
 describe("Login User", () => {
   it("should Login user", () => {
-    cy.visit("/");
-    cy.get('[data-testid="emailTestId"]').type("test@test.com");
-    cy.get('[data-testid="passwordTestId"]').type("kflsdfklsdfk");
-    cy.get('[data-testid="submitFormTestId"]').click();
+    // Working Example:
+    cy.loginUI("test@test.com", "kflsdfklsdfk");
     cy.get('[data-testid="loggedInUser"]');
-    cy.reload();
+
+    // DOES NOT WORK
+    // cy.visit("/");
+    // cy.loginPR("test@test.com", "kflsdfklsdfk");
+    // cy.reload();
+    // cy.get('[data-testid="loggedInUser"]');
   });
 });

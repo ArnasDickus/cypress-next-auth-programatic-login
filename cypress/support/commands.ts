@@ -1,4 +1,34 @@
 /// <reference types="cypress" />
+
+Cypress.Commands.add("loginUI", (email, password) => {
+  cy.visit("/");
+  cy.get('[data-testid="emailTestId"]').type(email);
+  cy.get('[data-testid="passwordTestId"]').type(password);
+  cy.get('[data-testid="submitFormTestId"]').click();
+});
+
+// @ts-ignore
+Cypress.Commands.add("loginPR", (email, password) => {
+  cy.request("GET", "/api/auth/csrf").then((csrfResponse: any) => {
+    const csrfToken = csrfResponse.body.csrfToken;
+    console.log("email", email);
+    console.log("password", password);
+    console.log("csrfToken", csrfToken);
+    cy.request("POST", "/api/auth/signin/credentials", {
+      email,
+      password,
+      csrfToken,
+    }).then((loginResponse) => {
+      console.log("loginResponse", loginResponse);
+      expect(loginResponse.status).to.equal(200);
+      cy.log("Response Body:", loginResponse.body);
+      cy.log("Response Headers:", loginResponse.headers);
+    });
+  });
+
+  return cy.wrap(null);
+});
+
 // ***********************************************
 // This example commands.ts shows you how to
 // create various custom commands and overwrite
